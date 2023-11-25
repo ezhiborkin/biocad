@@ -1,0 +1,2 @@
+# biocad
+docker-compose up
