@@ -13,14 +13,19 @@ import (
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
+// Error parse info
+// @Description Error parsing file info
+// @Description with filename, error and time
 type ErrorOpenFile struct {
-	FileName string    `json:"filename"`
-	Err      error     `json:"error"`
-	Time     time.Time `json:"time"`
+	FileName string    `json:"filename"` // File name
+	Err      error     `json:"error"`    // Error
+	Time     time.Time `json:"time"`     // Time
 }
 
+// Error response
+// @Description Error response
 type errorResponse struct {
-	Message string `json:"message"`
+	Message string `json:"message"` // Error message
 }
 
 func ErrorParsingFile(filePath string, client *mongo.Client, err error) error {

@@ -11,13 +11,14 @@ import (
 
 // @Summary Get processed data
 // @Description Get processed data based on unit GUID with pagination
+// @Tags APIs
 // @Produce json
 // @Param unit_guid query string true "Unit GUID to filter processed data"
 // @Param page query int false "Page number for pagination (default is 1)"
 // @Param limit query int false "Number of items to show per page (default is 10)"
 // @Success 200 {array} unit.Unit
 // @Failure 500 {object} er.errorResponse
-// @Router /api/processeddata [get]
+// @Router /processeddata [get]
 func (h *Handler) getProcessedData(c *gin.Context) {
 	unitGUID := c.Query("unit_guid")
 	pageStr := c.DefaultQuery("page", "1")

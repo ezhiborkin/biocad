@@ -1,58 +1,86 @@
-basePath: /
+basePath: /api
 definitions:
   er.ErrorOpenFile:
+    description: Error parsing file info with filename, error and time
     properties:
-      error: {}
+      error:
+        description: Error
       filename:
+        description: File name
         type: string
       time:
+        description: Time
         type: string
     type: object
   er.errorResponse:
+    description: Error response
     properties:
       message:
+        description: Error message
         type: string
     type: object
   unit.ProcessedFile:
+    description: Processed file info
     properties:
       filepath:
+        description: File path
         type: string
     type: object
   unit.Unit:
+    description: Unit info with number, mqtt, invid, unitguid, with messageid, text,
+      context, class, with level, area, addr, block, with type_, bit, invertbit
     properties:
       addr:
+        description: Addr
         type: string
       area:
+        description: Area
         type: string
-      bit: {}
-      block: {}
+      bit:
+        description: Bit
+      block:
+        description: Block
       class:
+        description: Class
         type: string
-      context: {}
-      invertbit: {}
+      context:
+        description: Context
+      invertbit:
+        description: Invert bit
       invid:
+        description: Invid
         type: string
       level:
+        description: Level
         type: string
       messageid:
+        description: Message ID
         type: string
-      mqtt: {}
+      mqtt:
+        description: MQTT
       number:
+        description: Unit number
         type: string
       text:
+        description: Text
         type: string
-      type_: {}
+      type_:
+        description: Type
       unitguid:
+        description: Unit GUID
         type: string
     type: object
 host: localhost:8080
 info:
-  contact: {}
+  contact:
+    email: zhiborkin_ei@mail.ru
+    name: Evgenii Zhiborkin
+    url: https://t.me/zyltrcuj
   description: API Server for parsing files and getting data from MongoDB
   title: File Parser API
   version: "1.0"
 paths:
-  /api/errorsdata:
+  /errorsdata:
     get:
       description: Get errors data based on filename with pagination
       parameters:
@@ -83,7 +111,9 @@ paths:
           schema:
             $ref: '#/definitions/er.errorResponse'
       summary: Get errors data
-  /api/processeddata:
+      tags:
+      - APIs
+  /processeddata:
     get:
       description: Get processed data based on unit GUID with pagination
       parameters:
@@ -114,7 +144,9 @@ paths:
           schema:
             $ref: '#/definitions/er.errorResponse'
       summary: Get processed data
-  /api/processedfiles:
+      tags:
+      - APIs
+  /processedfiles:
     get:
       description: Get processed files with pagination
       parameters:
@@ -140,4 +172,6 @@ paths:
           schema:
             $ref: '#/definitions/er.errorResponse'
       summary: Get processed files
+      tags:
+      - APIs
 swagger: "2.0"

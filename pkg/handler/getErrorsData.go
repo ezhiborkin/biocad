@@ -11,13 +11,14 @@ import (
 
 // @Summary Get errors data
 // @Description Get errors data based on filename with pagination
+// @Tags APIs
 // @Produce json
 // @Param filename query string true "File name to filter errors"
 // @Param page query int false "Page number for pagination (default is 1)"
 // @Param limit query int false "Number of items to show per page (default is 10)"
 // @Success 200 {array} er.ErrorOpenFile
 // @Failure 500 {object} er.errorResponse
-// @Router /api/errorsdata [get]
+// @Router /errorsdata [get]
 func (h *Handler) getErrorsData(c *gin.Context) {
 	fileName := c.Query("filename")
 	pageStr := c.DefaultQuery("page", "1")

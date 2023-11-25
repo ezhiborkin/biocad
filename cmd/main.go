@@ -31,9 +31,14 @@ import (
 // @title File Parser API
 // @version 1.0
 // @description API Server for parsing files and getting data from MongoDB
+// @contact github: @ezhiborkin
 
 // @host localhost:8080
-// @BasePath /
+// @BasePath /api
+
+// @contact.name   Evgenii Zhiborkin
+// @contact.url    https://t.me/zyltrcuj
+// @contact.email  zhiborkin_ei@mail.ru
 
 func main() {
 	var mutex sync.Mutex

@@ -9,17 +9,24 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {},
+        "contact": {
+            "name": "Evgenii Zhiborkin",
+            "url": "https://t.me/zyltrcuj",
+            "email": "zhiborkin_ei@mail.ru"
+        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/api/errorsdata": {
+        "/errorsdata": {
             "get": {
                 "description": "Get errors data based on filename with pagination",
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "APIs"
                 ],
                 "summary": "Get errors data",
                 "parameters": [
@@ -62,11 +69,14 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/processeddata": {
+        "/processeddata": {
             "get": {
                 "description": "Get processed data based on unit GUID with pagination",
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "APIs"
                 ],
                 "summary": "Get processed data",
                 "parameters": [
@@ -109,11 +119,14 @@ const docTemplate = `{
                 }
             }
         },
-        "/api/processedfiles": {
+        "/processedfiles": {
             "get": {
                 "description": "Get processed files with pagination",
                 "produces": [
                     "application/json"
+                ],
+                "tags": [
+                    "APIs"
                 ],
                 "summary": "Get processed files",
                 "parameters": [
@@ -152,67 +165,98 @@ const docTemplate = `{
     },
     "definitions": {
         "er.ErrorOpenFile": {
+            "description": "Error parsing file info with filename, error and time",
             "type": "object",
             "properties": {
-                "error": {},
+                "error": {
+                    "description": "Error"
+                },
                 "filename": {
+                    "description": "File name",
                     "type": "string"
                 },
                 "time": {
+                    "description": "Time",
                     "type": "string"
                 }
             }
         },
         "er.errorResponse": {
+            "description": "Error response",
             "type": "object",
             "properties": {
                 "message": {
+                    "description": "Error message",
                     "type": "string"
                 }
             }
         },
         "unit.ProcessedFile": {
+            "description": "Processed file info",
             "type": "object",
             "properties": {
                 "filepath": {
+                    "description": "File path",
                     "type": "string"
                 }
             }
         },
         "unit.Unit": {
+            "description": "Unit info with number, mqtt, invid, unitguid, with messageid, text, context, class, with level, area, addr, block, with type_, bit, invertbit",
             "type": "object",
             "properties": {
                 "addr": {
+                    "description": "Addr",
                     "type": "string"
                 },
                 "area": {
+                    "description": "Area",
                     "type": "string"
                 },
-                "bit": {},
-                "block": {},
+                "bit": {
+                    "description": "Bit"
+                },
+                "block": {
+                    "description": "Block"
+                },
                 "class": {
+                    "description": "Class",
                     "type": "string"
                 },
-                "context": {},
-                "invertbit": {},
+                "context": {
+                    "description": "Context"
+                },
+                "invertbit": {
+                    "description": "Invert bit"
+                },
                 "invid": {
+                    "description": "Invid",
                     "type": "string"
                 },
                 "level": {
+                    "description": "Level",
                     "type": "string"
                 },
                 "messageid": {
+                    "description": "Message ID",
                     "type": "string"
                 },
-                "mqtt": {},
+                "mqtt": {
+                    "description": "MQTT"
+                },
                 "number": {
+                    "description": "Unit number",
                     "type": "string"
                 },
                 "text": {
+                    "description": "Text",
                     "type": "string"
                 },
-                "type_": {},
+                "type_": {
+                    "description": "Type"
+                },
                 "unitguid": {
+                    "description": "Unit GUID",
                     "type": "string"
                 }
             }
@@ -224,7 +268,7 @@ const docTemplate = `{
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
 	Host:             "localhost:8080",
-	BasePath:         "/",
+	BasePath:         "/api",
 	Schemes:          []string{},
 	Title:            "File Parser API",
 	Description:      "API Server for parsing files and getting data from MongoDB",

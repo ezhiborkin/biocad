@@ -10,12 +10,13 @@ import (
 
 // @Summary Get processed files
 // @Description Get processed files with pagination
+// @Tags APIs
 // @Produce json
 // @Param page query int false "Page number for pagination (default is 1)"
 // @Param limit query int false "Number of items to show per page (default is 10)"
 // @Success 200 {array} unit.ProcessedFile
 // @Failure 500 {object} er.errorResponse
-// @Router /api/processedfiles [get]
+// @Router /processedfiles [get]
 func (h *Handler) getProcessedFiles(c *gin.Context) {
 	pageStr := c.DefaultQuery("page", "1")
 	limitStr := c.DefaultQuery("limit", "10")
