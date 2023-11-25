@@ -8,11 +8,18 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+// @Summary Get processed files
+// @Description Get processed files with pagination
+// @Produce json
+// @Param page query int false "Page number for pagination (default is 1)"
+// @Param limit query int false "Number of items to show per page (default is 10)"
+// @Success 200 {array} unit.ProcessedFile
+// @Failure 500 {object} er.errorResponse
+// @Router /api/processedfiles [get]
 func (h *Handler) getProcessedFiles(c *gin.Context) {
 	pageStr := c.DefaultQuery("page", "1")
 	limitStr := c.DefaultQuery("limit", "10")
 
-	// Set default values for page and limit
 	page, _ := strconv.Atoi(pageStr)
 	if page <= 0 {
 		page = 1
@@ -20,16 +27,13 @@ func (h *Handler) getProcessedFiles(c *gin.Context) {
 
 	limit, _ := strconv.Atoi(limitStr)
 	if limit <= 0 {
-		limit = 10 // Set a default limit
+		limit = 10
 	}
 
-	// Calculate the skip value for pagination
 	skip := (page - 1) * limit
 
-	// Define the filter based on the unit_guid
 	// filter := bson.M{"filepath": ""}
 
-	// Define options for pagination
 	options := options.Find().SetSkip(int64(skip)).SetLimit(int64(limit))
 
 	files, err := h.services.GetProcessedFileS(options)

@@ -1,0 +1,143 @@
+basePath: /
+definitions:
+  er.ErrorOpenFile:
+    properties:
+      error: {}
+      filename:
+        type: string
+      time:
+        type: string
+    type: object
+  er.errorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  unit.ProcessedFile:
+    properties:
+      filepath:
+        type: string
+    type: object
+  unit.Unit:
+    properties:
+      addr:
+        type: string
+      area:
+        type: string
+      bit: {}
+      block: {}
+      class:
+        type: string
+      context: {}
+      invertbit: {}
+      invid:
+        type: string
+      level:
+        type: string
+      messageid:
+        type: string
+      mqtt: {}
+      number:
+        type: string
+      text:
+        type: string
+      type_: {}
+      unitguid:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: API Server for parsing files and getting data from MongoDB
+  title: File Parser API
+  version: "1.0"
+paths:
+  /api/errorsdata:
+    get:
+      description: Get errors data based on filename with pagination
+      parameters:
+      - description: File name to filter errors
+        in: query
+        name: filename
+        required: true
+        type: string
+      - description: Page number for pagination (default is 1)
+        in: query
+        name: page
+        type: integer
+      - description: Number of items to show per page (default is 10)
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/er.ErrorOpenFile'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/er.errorResponse'
+      summary: Get errors data
+  /api/processeddata:
+    get:
+      description: Get processed data based on unit GUID with pagination
+      parameters:
+      - description: Unit GUID to filter processed data
+        in: query
+        name: unit_guid
+        required: true
+        type: string
+      - description: Page number for pagination (default is 1)
+        in: query
+        name: page
+        type: integer
+      - description: Number of items to show per page (default is 10)
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/unit.Unit'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/er.errorResponse'
+      summary: Get processed data
+  /api/processedfiles:
+    get:
+      description: Get processed files with pagination
+      parameters:
+      - description: Page number for pagination (default is 1)
+        in: query
+        name: page
+        type: integer
+      - description: Number of items to show per page (default is 10)
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/unit.ProcessedFile'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/er.errorResponse'
+      summary: Get processed files
+swagger: "2.0"

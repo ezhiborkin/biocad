@@ -19,6 +19,10 @@ type ErrorOpenFile struct {
 	Time     time.Time `json:"time"`
 }
 
+type errorResponse struct {
+	Message string `json:"message"`
+}
+
 func ErrorParsingFile(filePath string, client *mongo.Client, err error) error {
 	log.Println(err)
 	client.Database(viper.GetString("db.dbname")).Collection(viper.GetString("collectionName.errors")).InsertOne(context.Background(), ErrorOpenFile{

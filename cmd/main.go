@@ -17,6 +17,8 @@ import (
 	"sync"
 	"time"
 
+	_ "mas/docs"
+
 	"github.com/grailbio/base/tsv"
 	"github.com/joho/godotenv"
 	"github.com/spf13/viper"
@@ -25,6 +27,13 @@ import (
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 )
+
+// @title File Parser API
+// @version 1.0
+// @description API Server for parsing files and getting data from MongoDB
+
+// @host localhost:8080
+// @BasePath /
 
 func main() {
 	var mutex sync.Mutex
