@@ -1,0 +1,29 @@
+version: '3'
+services:
+  mongo:
+    restart: always
+    image: mongo
+    container_name: ${MONGO_HOST}
+    ports:
+      - "${MONGO_PORT}:27017"
+    volumes:
+      - mongodb_data:/data/db
+    env_file: .env
+  web:
+    build:
+      context: .
+    container_name: my-web
+    ports:
+      - "${PORT}:8080"
+    depends_on:
+      - mongo
+    environment:
+      - MONGO_URI=mongodb://${MONGO_HOST}:${MONGO_PORT}  
+    volumes:
+      - ${DIRECTORY_PATH}:${DIRECTORY_PATH_DOCKER}
+      - ${PROCESSED_DIRECTORY_PATH}:${PROCESSED_DIRECTORY_PATH_DOCKER}
+      - ${ERRORS_DIRECTORY_PATH}:${ERRORS_DIRECTORY_PATH_DOCKER}
+    env_file: .env
+
+volumes:
+  mongodb_data:

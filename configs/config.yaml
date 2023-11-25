@@ -1,0 +1,8 @@
+db:
+   dbname: "mas"
+collectionName:
+   errors: "errors"
+   processedFiles: "processedfiles"
+   processedData: "units"
+
+
